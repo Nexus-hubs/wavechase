@@ -189,6 +189,17 @@
             box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
         }
 
+        .btn-warning {
+            background: #dc2626;
+            color: white;
+        }
+
+        .btn-warning:hover {
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(220, 38, 38, 0.4);
+        }
+
         /* Quick Search Pills */
         .quick-search {
             display: flex;
@@ -463,62 +474,133 @@
             transform: rotate(-20deg);
         }
 
-        /* Info Section */
-        .info-section {
-            background: rgba(255, 255, 255, 0.03);
+        /* Storm Watch Section */
+        .storm-section {
+            background: rgba(220, 38, 38, 0.1);
             padding: 60px 20px;
             margin-top: 50px;
+            border-top: 2px solid rgba(220, 38, 38, 0.3);
         }
 
-        .info-cards {
+        .storm-container {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .storm-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .storm-header h2 {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .storm-header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1em;
+        }
+
+        .storm-tools {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
+            margin-bottom: 40px;
         }
 
-        .info-card {
+        .storm-tool-card {
             background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 16px;
             padding: 30px;
+            text-align: center;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .info-card:hover {
-            transform: translateY(-8px);
+        .storm-tool-card:hover {
             background: rgba(255, 255, 255, 0.12);
             border-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-8px);
         }
 
-        .info-card h3 {
-            font-size: 1.3em;
-            margin-bottom: 18px;
+        .storm-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .storm-tool-card h3 {
+            font-size: 1.4em;
             color: #ffffff;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
-        .info-card ul {
-            list-style: none;
+        .storm-tool-card p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        .info-card ul li {
-            padding: 8px 0;
+        .storm-tool-card button {
+            width: 100%;
+        }
+
+        /* Storm Data Display */
+        .storm-data-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-top: 30px;
+            animation: fadeInUp 0.7s ease;
+        }
+
+        .storm-data-section.active {
+            display: block;
+        }
+
+        .storm-alerts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .alert-card {
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .alert-card:hover {
+            background: rgba(220, 38, 38, 0.25);
+            transform: scale(1.02);
+        }
+
+        .alert-card h4 {
+            color: #fca5a5;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .alert-card p {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.92em;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.2s ease;
-        }
-
-        .info-card ul li:last-child {
-            border-bottom: none;
-        }
-
-        .info-card ul li:hover {
-            color: #ffffff;
-            padding-left: 8px;
+            font-size: 0.9em;
+            line-height: 1.5;
         }
 
         /* Footer */
@@ -628,16 +710,26 @@
                 font-size: 1.4em;
             }
 
-            .info-section {
+            .storm-section {
                 padding: 40px 20px;
             }
 
-            .info-cards {
+            .storm-header h2 {
+                font-size: 2em;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .storm-tools {
                 gap: 20px;
             }
 
-            .info-card {
+            .storm-tool-card {
                 padding: 25px;
+            }
+
+            .storm-data-section {
+                padding: 25px 18px;
             }
 
             .location-chip {
@@ -658,6 +750,14 @@
 
             .forecast-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+
+            .storm-tools {
+                grid-template-columns: 1fr;
+            }
+
+            .storm-alerts {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -726,39 +826,42 @@
         </div>
     </div>
 
-    <div class="info-section">
-        <div class="info-cards">
-            <div class="info-card">
-                <h3>🌊 Wave Data</h3>
-                <ul>
-                    <li>Total wave height</li>
-                    <li>Wind wave height</li>
-                    <li>Swell wave height</li>
-                    <li>Wave direction</li>
-                    <li>24-hour forecasts</li>
-                </ul>
+    <!-- Storm Watch Section -->
+    <div class="storm-section">
+        <div class="storm-container">
+            <div class="storm-header">
+                <h2>⚠️ STORM WATCH ⚠️</h2>
+                <p>Track severe weather conditions and marine alerts</p>
             </div>
 
-            <div class="info-card">
-                <h3>🌤️ Weather Data</h3>
-                <ul>
-                    <li>Current temperature</li>
-                    <li>Wind speed & direction</li>
-                    <li>Wave period</li>
-                    <li>Real-time conditions</li>
-                    <li>Weather forecast</li>
-                </ul>
+            <div class="storm-tools">
+                <div class="storm-tool-card" onclick="fetchStormData()">
+                    <div class="storm-icon">🌪️</div>
+                    <h3>Weather Alerts</h3>
+                    <p>Get real-time weather warnings, wind alerts, and severe storm notifications from API</p>
+                    <button class="btn-warning"><span>Check Alerts</span></button>
+                </div>
+
+                <div class="storm-tool-card" onclick="searchStormReports()">
+                    <div class="storm-icon">📰</div>
+                    <h3>Storm Reports</h3>
+                    <p>Search latest storm and hurricane reports, weather news, and marine warnings</p>
+                    <button class="btn-primary"><span>Google Search</span></button>
+                </div>
+
+                <div class="storm-tool-card" onclick="openStormMap()">
+                    <div class="storm-icon">🗺️</div>
+                    <h3>Storm Tracking</h3>
+                    <p>View live storm paths, radar maps, and weather patterns on Google Maps</p>
+                    <button class="btn-secondary"><span>Open Maps</span></button>
+                </div>
             </div>
 
-            <div class="info-card">
-                <h3>🌍 Global Coverage</h3>
-                <ul>
-                    <li>Worldwide locations</li>
-                    <li>Live API data</li>
-                    <li>Popular surf destinations</li>
-                    <li>Marine forecasts</li>
-                    <li>Open-Meteo Marine API</li>
-                </ul>
+            <div class="storm-data-section" id="stormDataSection">
+                <h3 style="text-align: center; color: #fca5a5; font-size: 1.8em; margin-bottom: 25px;">Weather Alerts</h3>
+                <div class="storm-alerts" id="stormAlerts">
+                    <!-- Storm alerts will be inserted here -->
+                </div>
             </div>
         </div>
     </div>
@@ -999,6 +1102,159 @@
         function quickSearch(location) {
             document.getElementById('locationInput').value = location;
             fetchLiveData();
+        }
+
+        // Storm Watch Functions
+
+        // Fetch storm and weather alert data from Open-Meteo API
+        async function fetchStormData() {
+            const location = getLocation();
+            if (!location) {
+                showError('Please enter a location to check for storm alerts');
+                return;
+            }
+
+            console.log('⚠️ Starting Storm Data Fetch for:', location);
+
+            showLoading(true);
+            document.getElementById('stormDataSection').classList.remove('active');
+
+            try {
+                // Geocode the location
+                const coords = await geocodeLocation(location);
+
+                // Fetch weather data including wind and precipitation
+                const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current=temperature_2m,wind_speed_10m,wind_gusts_10m,precipitation,weather_code&hourly=wind_speed_10m,wind_gusts_10m,precipitation_probability&timezone=auto&forecast_days=3`;
+
+                console.log('🌪️ Weather Alert API Call:', weatherUrl);
+
+                const response = await fetch(weatherUrl);
+                const data = await response.json();
+
+                console.log('⚠️ Weather Alert Response:', data);
+
+                displayStormAlerts(coords, data);
+
+                showLoading(false);
+            } catch (error) {
+                console.error('❌ Error in fetchStormData:', error);
+                showLoading(false);
+                showError(error.message);
+            }
+        }
+
+        function displayStormAlerts(coords, weatherData) {
+            const current = weatherData.current;
+            const hourly = weatherData.hourly;
+
+            // Analyze current conditions for warnings
+            const alerts = [];
+
+            // Wind alert
+            if (current.wind_speed_10m > 20) {
+                alerts.push({
+                    title: '⚠️ High Wind Warning',
+                    message: `Strong winds detected: ${current.wind_speed_10m.toFixed(1)} km/h with gusts up to ${current.wind_gusts_10m.toFixed(1)} km/h. Exercise caution near water.`
+                });
+            }
+
+            // Precipitation alert
+            if (current.precipitation > 5) {
+                alerts.push({
+                    title: '🌧️ Heavy Precipitation Alert',
+                    message: `Current precipitation: ${current.precipitation.toFixed(1)} mm. Poor visibility and rough sea conditions expected.`
+                });
+            }
+
+            // Find max wind gusts in next 24 hours
+            const maxWindGust = Math.max(...hourly.wind_gusts_10m.slice(0, 24));
+            if (maxWindGust > 30) {
+                alerts.push({
+                    title: '💨 Storm Warning - 24hr Forecast',
+                    message: `Severe wind gusts up to ${maxWindGust.toFixed(1)} km/h expected in the next 24 hours. Dangerous marine conditions.`
+                });
+            }
+
+            // Check precipitation probability
+            const maxPrecipProb = Math.max(...hourly.precipitation_probability.slice(0, 24));
+            if (maxPrecipProb > 70) {
+                alerts.push({
+                    title: '☔ Rain Alert',
+                    message: `High chance of precipitation (${maxPrecipProb}%) in the next 24 hours. Plan accordingly.`
+                });
+            }
+
+            // Temperature extreme
+            if (current.temperature_2m < 5) {
+                alerts.push({
+                    title: '❄️ Cold Weather Advisory',
+                    message: `Current temperature: ${current.temperature_2m.toFixed(1)}°C. Risk of hypothermia. Wear appropriate protection.`
+                });
+            }
+
+            const locationText = coords.admin1
+                ? `${coords.name}, ${coords.admin1}, ${coords.country}`
+                : `${coords.name}, ${coords.country}`;
+
+            // Display alerts
+            let alertsHTML = '';
+
+            if (alerts.length === 0) {
+                alertsHTML = `
+                    <div style="text-align: center; padding: 40px; color: rgba(255,255,255,0.7);">
+                        <div style="font-size: 4em; margin-bottom: 20px;">✅</div>
+                        <h3 style="color: #4ade80; font-size: 1.5em; margin-bottom: 10px;">No Active Alerts</h3>
+                        <p style="font-size: 1.1em;">Weather conditions are currently safe in ${locationText}</p>
+                        <p style="margin-top: 15px; font-size: 0.95em;">Current: ${current.temperature_2m.toFixed(1)}°C, Wind: ${current.wind_speed_10m.toFixed(1)} km/h</p>
+                    </div>
+                `;
+            } else {
+                alertsHTML = `<div style="text-align: center; margin-bottom: 25px; color: rgba(255,255,255,0.8);">
+                    <p style="font-size: 1.1em;">${locationText}</p>
+                    <p style="margin-top: 5px; font-size: 0.95em;">${alerts.length} active alert${alerts.length > 1 ? 's' : ''}</p>
+                </div>`;
+
+                alerts.forEach(alert => {
+                    alertsHTML += `
+                        <div class="alert-card">
+                            <h4>${alert.title}</h4>
+                            <p>${alert.message}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById('stormAlerts').innerHTML = alertsHTML;
+            document.getElementById('stormDataSection').classList.add('active');
+
+            // Smooth scroll to storm alerts
+            document.getElementById('stormDataSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Google Search for storm reports
+        function searchStormReports() {
+            const location = getLocation();
+            if (!location) {
+                showError('Please enter a location to search storm reports');
+                return;
+            }
+
+            const searchQuery = `${location} storm warning hurricane weather alert marine forecast`;
+            const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
+            window.open(googleSearchUrl, '_blank');
+        }
+
+        // Open Google Maps with weather layer for storm tracking
+        function openStormMap() {
+            const location = getLocation();
+            if (!location) {
+                showError('Please enter a location to view on maps');
+                return;
+            }
+
+            // Google Maps URL with weather layer
+            const mapsUrl = `https://www.google.com/maps/search/${encodeURIComponent(location)}`;
+            window.open(mapsUrl, '_blank');
         }
     </script>
 </body>
