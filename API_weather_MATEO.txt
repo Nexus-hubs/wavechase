@@ -1,0 +1,12 @@
+const lat = 36.963;   // example: replace with your point
+const lon = -122.026;
+const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height,wind_wave_height,swell_wave_height&timezone=auto`;
+
+fetch(url)
+  .then(r => r.json())
+  .then(data => {
+    // data.hourly.time is ISO timestamps, data.hourly.wave_height is meters
+    console.log('times:', data.hourly.time.slice(0,6));
+    console.log('wave heights (m):', data.hourly.wave_height.slice(0,6));
+  })
+  .catch(err => console.error(err));
